@@ -1,13 +1,9 @@
-# Binaries for programs and plugins
 *.exe
 *.dll
 *.so
 *.dylib
-
+debug
 *.test
-
 *.out
-
 .glide/
-
 db/
