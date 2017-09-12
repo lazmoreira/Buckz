@@ -30,4 +30,16 @@ var routes = Routes{
 		"/todos/{todoId}",
 		TodoShow,
 	},
+	Route{
+		"CategoryCreate",
+		"POST",
+		"/category/{name}",
+		CategoryCreate,
+	},
+	Route{
+		"CategoryShow",
+		"GET",
+		"/category/{name}",
+		CategoryShow,
+	},
 }
