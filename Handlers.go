@@ -9,6 +9,7 @@ import (
 	"github.com/syndtr/goleveldb/leveldb"
 )
 
+//CategoryCreate comment
 func CategoryCreate(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 
@@ -23,6 +24,7 @@ func CategoryCreate(w http.ResponseWriter, r *http.Request) {
 	err = db.Put([]byte(vars["name"]), []byte(vars["name"]), nil)
 }
 
+//CategoryShow comment
 func CategoryShow(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 
@@ -43,6 +45,7 @@ func CategoryShow(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Data: %s", data)
 }
 
+//Index comment
 func Index(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintln(w, "Welcome!")
 	db, err := leveldb.OpenFile("./db/buckzdb", nil)
@@ -54,6 +57,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	defer db.Close()
 }
 
+//TodoIndex comment
 func TodoIndex(w http.ResponseWriter, r *http.Request) {
 	todos := Todos{
 		Todo{Name: "Write presentation"},
@@ -65,6 +69,7 @@ func TodoIndex(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+//TodoShow comment
 func TodoShow(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	todoID := vars["todoId"]
