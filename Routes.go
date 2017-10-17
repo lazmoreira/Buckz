@@ -36,4 +36,10 @@ var routes = Routes{
 		"/category/{name}",
 		CategoryShow,
 	},
+	Route{
+		"CategoryDelete",
+		"DELETE",
+		"category/{categoryId}",
+		CategoryDelete,
+	}
 }
