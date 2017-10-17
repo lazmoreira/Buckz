@@ -17,4 +17,5 @@ type Category struct {
 	URI            string `json:"uri"`
 }
 
+//Categories documentation
 type Categories []Category
