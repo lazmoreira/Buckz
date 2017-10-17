@@ -7,12 +7,32 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/syndtr/goleveldb/leveldb"
+	"github.com/syndtr/goleveldb/leveldb/util"
 )
 
+//CategoryIndex documentation
 func CategoryIndex(w http.ResponseWriter, r *http.Request) {
-	categories := Categories{
-		Category{CategoryID: "0001", Name: "Category 1"},
-		Category{CategoryID: "0002", Name: "Category 2"},
+	db, err := leveldb.OpenFile(c.Database, nil)
+
+	if err != nil {
+		panic(err)
+	}
+
+	defer db.Close()
+
+	iterator := db.NewIterator(util.BytesPrefix([]byte("cat-")), nil)
+
+	categories := Categories{}
+	category := Category{}
+
+	for iterator.Next() {
+		err := json.Unmarshal(iterator.Value(), &category)
+
+		if err != nil {
+			panic(err)
+		}
+
+		categories = append(categories, category)
 	}
 
 	if err := json.NewEncoder(w).Encode(categories); err != nil {
@@ -30,7 +50,7 @@ func CategoryCreate(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 
-	category := Category{CategoryID: "0002", Name: "Categoria 2", Uri: c.baseUrl() + "category/0002"}
+	category := Category{CategoryID: "0002", Name: "Categoria 2", URI: c.BaseURL + "category/0002"}
 
 	cat, err := json.Marshal(category)
 
@@ -70,5 +90,5 @@ func CategoryShow(w http.ResponseWriter, r *http.Request) {
 //Index comment
 func Index(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintln(w, "Welcome!")
-	fmt.Fprintln(w, c.baseUrl())
+	fmt.Fprintln(w, c.BaseURL)
 }
