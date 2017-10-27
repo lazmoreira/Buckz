@@ -3,7 +3,7 @@ package main
 import "time"
 
 type User struct {
-	UserID    int32     `json:"userId"`
+	UserID    int       `json:"userId"`
 	FirstName string    `json:"firstName"`
 	LastName  string    `json:"lastName"`
 	Email     string    `json:"email"`
@@ -13,7 +13,7 @@ type User struct {
 type Category struct {
 	CategoryID     string `json:"categoryId"`
 	Name           string `json:"name"`
-	ParentCategory int32  `json:"parentCategory"`
+	ParentCategory int    `json:"parentCategory"`
 	URI            string `json:"uri"`
 }
 

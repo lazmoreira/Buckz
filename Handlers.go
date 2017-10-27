@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"strconv"
 
 	"github.com/gorilla/mux"
 	"github.com/syndtr/goleveldb/leveldb"
@@ -42,6 +43,7 @@ func CategoryIndex(w http.ResponseWriter, r *http.Request) {
 
 //CategoryCreate comment
 func CategoryCreate(w http.ResponseWriter, r *http.Request) {
+
 	db, err := leveldb.OpenFile(c.Database, nil)
 
 	defer db.Close()
@@ -50,7 +52,12 @@ func CategoryCreate(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 
-	category := Category{CategoryID: "0002", Name: "Categoria 2", URI: c.BaseURL + "category/0002"}
+	var category Category
+
+	category.CategoryID = r.FormValue("categoryId")
+	category.Name = r.FormValue("name")
+	category.ParentCategory, _ = strconv.Atoi(r.FormValue("parentCategory"))
+	category.URI = c.BaseURL + "category/cat-" + category.CategoryID
 
 	cat, err := json.Marshal(category)
 
@@ -85,6 +92,11 @@ func CategoryShow(w http.ResponseWriter, r *http.Request) {
 	}
 
 	fmt.Fprintf(w, "Data: %s", data)
+}
+
+//CategoryDelete comments
+func CategoryDelete(w http.ResponseWriter, r *http.Request) {
+
 }
 
 //Index comment

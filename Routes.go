@@ -41,5 +41,5 @@ var routes = Routes{
 		"DELETE",
 		"category/{categoryId}",
 		CategoryDelete,
-	}
+	},
 }
