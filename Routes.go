@@ -33,13 +33,13 @@ var routes = Routes{
 	Route{
 		"CategoryShow",
 		"GET",
-		"/category/{name}",
+		"/category/{categoryId}",
 		CategoryShow,
 	},
 	Route{
 		"CategoryDelete",
 		"DELETE",
-		"category/{categoryId}",
+		"/category/{categoryId}",
 		CategoryDelete,
 	},
 }

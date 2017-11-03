@@ -83,9 +83,9 @@ func CategoryShow(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 
-	categoryName := []byte(vars["name"])
+	categoryID := []byte(vars["categoryId"])
 
-	data, err := db.Get(categoryName, nil)
+	data, err := db.Get(categoryID, nil)
 
 	if err != nil {
 		panic(err)
@@ -96,7 +96,25 @@ func CategoryShow(w http.ResponseWriter, r *http.Request) {
 
 //CategoryDelete comments
 func CategoryDelete(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
 
+	db, err := leveldb.OpenFile(c.Database, nil)
+
+	defer db.Close()
+
+	if err != nil {
+		panic(err)
+	}
+
+	categoryID := []byte(vars["categoryId"])
+
+	err = db.Delete(categoryID, nil)
+
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Fprintf(w, "Category %s deleted successfully.", categoryID)
 }
 
 //Index comment
