@@ -1,4 +1,7 @@
 {
     "BaseUrl": "http://127.0.0.1:8080/",
+    "RedisEndpoint": "pub-redis-14396.eu-central-1-1.1.ec2.redislabs.com:14396",
+    "RedisDatabase": "Buckz",
+    "RedisPass": "Thunderbolt@13",
     "Database": "./db/buckzdb"
 }

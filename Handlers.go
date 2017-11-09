@@ -13,6 +13,8 @@ import (
 
 //CategoryIndex documentation
 func CategoryIndex(w http.ResponseWriter, r *http.Request) {
+	client := getNewClient()	
+
 	db, err := leveldb.OpenFile(c.Database, nil)
 
 	if err != nil {
